@@ -1,0 +1,23 @@
+{
+  "name": "npm-demo",
+  "version": "1.0.0",
+  "description": "my first npm demo project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "npm-demo",
+    "firstapp"
+  ],
+  "author": "Arun",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.6.0",
+    "dropzone": "^5.7.2"
+  },
+  "devDependencies": {
+    "typescript": "^4.1.3",
+    "webpack": "^5.20.0"
+  }
+}

@@ -1,0 +1,1 @@
+my first sample for nodejs to read using fs module
