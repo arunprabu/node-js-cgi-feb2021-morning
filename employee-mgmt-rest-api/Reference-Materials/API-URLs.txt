@@ -1,0 +1,19 @@
+http://localhost:3000 - Home 
+
+API Endpoints for Employee Management App!
+
+Add an Employee - POST 
+  http://localhost:3000/api/employees   
+
+List of employees - GET
+  http://localhost:3000/api/employees   
+
+Fetch Employee Details  - GET 
+  http://localhost:3000/api/employees/1
+
+Update Employee - PUT
+  http://localhost:3000/api/employees/1
+
+Delete Employee - DELETE 
+  http://localhost:3000/api/employees/1
+
