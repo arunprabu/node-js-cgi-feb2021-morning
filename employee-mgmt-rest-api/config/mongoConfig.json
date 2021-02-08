@@ -1,0 +1,7 @@
+{
+  "url": "mongodb://localhost:27017/employeesDB",
+  "options": {
+    "useNewUrlParser": true,
+    "useUnifiedTopology": true
+  }
+}

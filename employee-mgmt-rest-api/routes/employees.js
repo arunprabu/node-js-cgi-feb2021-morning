@@ -35,14 +35,6 @@ router.get('/', function(req, res, next) {
   });
 });
 
-
-
-
-
-
-
-
-
 /* GET fetch employee details.  http://localhost:3000/api/employees/:id  */
 router.get('/:id', function(req, res, next) {
   console.log(req.params.id);
@@ -56,31 +48,19 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* PUT update employee .  http://localhost:3000/api/employees/:id  */
 router.put('/:id', function(req, res, next) {
-  console.log(req.params.id);
-  console.log(req.body);
-  res.json({
-    message: 'Updated Successfully!'
+
+  employeeService.updateEmployee(req.params.id, req.body, (err, data) => {
+    if(!err){
+      res.json(data);
+    }else{
+      res.json(err);
+    }
   });
 });
 
-/* DELETE delete employee .  http://localhost:3000/api/employees/:id  */
+/* TODO: DELETE delete employee .  http://localhost:3000/api/employees/:id  */
 router.delete('/:id', function(req, res, next) {
   console.log(req.params.id);
 
