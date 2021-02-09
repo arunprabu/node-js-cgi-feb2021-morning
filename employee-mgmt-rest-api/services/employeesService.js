@@ -18,45 +18,44 @@ exports.addEmployee = (employeeData, callback) => {
   });
 }
 
-
-
-
 // read 
 exports.getEmployees = (callback) => {
-  let employeeList = [
-    {
-      id: 1,
-      name: 'John'
-    },
-    {
-      id: 2,
-      name: 'Steve'
+  
+  Employee.find((err, employeeList) => {
+    console.log(employeeList);
+    if(!err){
+      console.log('Employees Fetched Successfully!');
     }
-  ];
-  callback(null, employeeList);
+    callback(err, employeeList); 
+  });
 }
 
-exports.getEmployeeById = (employeeId, callback) => {
-  let employeeData = {
-    id: employeeId,
-    name: 'John',
-    companyName: 'CGI',
-    phone: 234332,
-    email: 'a@b.com'
-  }
-  callback(null, employeeData);
+exports.getEmployeeById = (_employeeId, callback) => {
+  console.log(_employeeId);
+  
+  Employee.findOne({employeeId: _employeeId}, (err, employeeData) => {
+    if(!err){
+      console.log('Employee Details Fetched Successfully!');
+    }
+    callback(err, employeeData);
+  });
 }
 
 // update employee
-exports.updateEmployee = (employeeId,
-  employeeData, callback) => {
-  console.log(employeeId);
-  console.log(employeeData);
+exports.updateEmployee = (_employeeId, _employeeData, callback) => {
+  console.log(_employeeId);
+  console.log(_employeeData);
 
-  let status = {
-    message: 'Employee Updated Successfully!!!'
-  }
-  callback(null, status);
+  Employee.updateOne({employeeId: _employeeId}, _employeeData, (err, status) => {
+    if(!err){
+      console.log('Employee Details Updated Successfully!');
+      status = {
+        message: 'Employee Updated Successfully!' 
+      }
+    }
+    callback(err, status);
+  });
+  
 }
 
 // TODO: delete employee

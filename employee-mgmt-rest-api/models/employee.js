@@ -15,5 +15,8 @@ const Employee = new Schema({
   updatedOn: { type: Date, default: Date.now }
 });
 
+// TODO: work on capturing unique email 
+// TODO: understand strict schema in mongoose
+
 Employee.plugin(autoIncrement.plugin, { model: 'Employee', field: 'employeeId', startAt: 1 });
-module.exports = mongoose.model('Employee', Employee);
+module.exports = mongoose.model('Employee', Employee); // Employee is the Collection

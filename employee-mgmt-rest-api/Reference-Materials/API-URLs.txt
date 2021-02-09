@@ -17,3 +17,26 @@ Update Employee - PUT
 Delete Employee - DELETE 
   http://localhost:3000/api/employees/1
 
+
+Topics to Cover
+---
+
+  Day 8
+  =---
+  API Authentication and Security
+  Sending E-Mails
+  File upload with multer
+  Building Video Conferencing App using WebRTC (Quick Intro)
+  Automated Testing
+    o Mocha JS
+    o Chai JS
+    o Chai HTTP to test REST API’s
+
+  TypeScript 
+  Working with TypeScript based Express JS Project (https://github.com/microsoft/TypeScript-Node-Starter)
+  oauth2
+  
+  
+  Note: Quick demo of RxJS in NodeJS App 
+
+======

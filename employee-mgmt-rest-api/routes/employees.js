@@ -17,6 +17,7 @@ router.post('/', function(req, res, next) {
     if(!err){
       res.json(data);
     }else{
+      // TODO: Customizing error
       res.json(err);
     }
   });
@@ -48,12 +49,25 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
+
+
+
+
+
 /* PUT update employee .  http://localhost:3000/api/employees/:id  */
 router.put('/:id', function(req, res, next) {
 
-  employeeService.updateEmployee(req.params.id, req.body, (err, data) => {
+  employeeService.updateEmployee(req.params.id, req.body, (err, status) => {
     if(!err){
-      res.json(data);
+      
+      employeeService.getEmployeeById(req.params.id, (_err, employeeData) => {
+        if(!_err){
+          res.json(employeeData);
+        }else{
+          res.json(_err);
+        }
+      });
+
     }else{
       res.json(err);
     }
