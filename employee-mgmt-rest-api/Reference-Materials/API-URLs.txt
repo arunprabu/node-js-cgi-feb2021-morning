@@ -20,12 +20,21 @@ Delete Employee - DELETE
 
 Topics to Cover
 ---
+  CRUD App
+  MySQL 
+  Callback Hell
+  Promise 
+  Observables (ReactiveX / RxJS )
+  CORS 
+  Deployment
+  PM2 (Clustering)
 
   Day 8
   =---
-  API Authentication and Security
-  Sending E-Mails
   File upload with multer
+  API Authentication and Security
+  oauth2
+  Sending E-Mails
   Building Video Conferencing App using WebRTC (Quick Intro)
   Automated Testing
     o Mocha JS
@@ -34,9 +43,41 @@ Topics to Cover
 
   TypeScript 
   Working with TypeScript based Express JS Project (https://github.com/microsoft/TypeScript-Node-Starter)
-  oauth2
+  
   
   
   Note: Quick demo of RxJS in NodeJS App 
 
 ======
+
+
+Verify JWT Token
+---
+https://stackabuse.com/authentication-and-authorization-with-jwts-in-express-js/
+
+const accessTokenSecret = 'somerandomaccesstoken';
+
+
+const authenticateJWT = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+
+    if (authHeader) {
+        const token = authHeader.split(' ')[1];
+
+        jwt.verify(token, accessTokenSecret, (err, user) => {
+            if (err) {
+                return res.sendStatus(403);
+            }
+
+            req.user = user;
+            next(); // call next if token valid
+        });
+    } else {
+        res.sendStatus(401); // send err if token not valid
+    }
+}
+
+
+app.get('/books', authenticateJWT, (req, res) => {
+    res.json(books);
+});

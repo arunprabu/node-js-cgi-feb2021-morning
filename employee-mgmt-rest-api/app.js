@@ -5,11 +5,27 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 
+var passport = require('passport');
+//var session = require('express-session');  //needed for passport
+
+
 var indexRouter = require('./routes/index');
 var employeesRouter = require('./routes/employees');
+var authRouter = require('./routes/auth');
+
+//connecting the models here directly 
+require('./models/user');
+//connecting passport config
+require('./config/passportConfig');
 
 // Creates an Express application. 
 var app = express();
+
+// setting up authentication middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 var corsOptions = {
   origin: '*', // you can mention the domain name without trailing slash
@@ -34,6 +50,7 @@ app.use('/', indexRouter);
 
 // For the API Endpoints */
 app.use('/api/employees', employeesRouter);
+app.use('/api/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
