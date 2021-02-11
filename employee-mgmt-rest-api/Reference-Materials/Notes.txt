@@ -1,0 +1,227 @@
+http://localhost:3000 - Home 
+
+API Endpoints for Employee Management App!
+
+Add an Employee - POST 
+  http://localhost:3000/api/employees   
+
+List of employees - GET
+  http://localhost:3000/api/employees   
+
+Fetch Employee Details  - GET 
+  http://localhost:3000/api/employees/1
+
+Update Employee - PUT
+  http://localhost:3000/api/employees/1
+
+Delete Employee - DELETE 
+  http://localhost:3000/api/employees/1
+
+
+Topics to Cover
+---
+  CRUD App
+  MySQL 
+  Callback Hell
+  Promise 
+  Observables (ReactiveX / RxJS )
+  CORS 
+  Deployment
+  PM2 (Clustering)
+
+  Day 8
+  =---
+
+  TypeScript 
+  Working with TypeScript based Express JS Project (https://github.com/microsoft/TypeScript-Node-Starter)
+  
+  
+  Day 9 (1 hour)
+  --
+    Building Video Conferencing App using WebRTC (Quick Intro)
+    Automated Testing
+      o Mocha JS
+      o Chai JS
+      o Chai HTTP to test REST API’s
+  
+  Note: Quick demo of RxJS in NodeJS App 
+
+======
+
+
+Verify JWT Token
+---
+https://stackabuse.com/authentication-and-authorization-with-jwts-in-express-js/
+
+const accessTokenSecret = 'somerandomaccesstoken';
+
+
+const authenticateJWT = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+
+    if (authHeader) {
+        const token = authHeader.split(' ')[1];
+
+        jwt.verify(token, accessTokenSecret, (err, user) => {
+            if (err) {
+                return res.sendStatus(403);
+            }
+
+            req.user = user;
+            next(); // call next if token valid
+        });
+    } else {
+        res.sendStatus(401); // send err if token not valid
+    }
+}
+
+
+app.get('/books', authenticateJWT, (req, res) => {
+    res.json(books);
+});
+
+TypeScript
+--
+  TS = JS + Datatyping 
+
+  Compiled-to-JavaScript Language
+  TS is OOP.
+  
+  Primitive Datatypes in JS: String, Number, Boolean, Undefined, Null, Symbol (ES2015), BigInt(ES2017)
+
+  1. Loosely typed Lang
+      Examples: JS, PHP, Python
+        var x = 10;
+        x = true; 
+        x = 'Arun'
+        x = [];
+        x = {}; 
+  
+  2. Strictly typed lang / Strongly-typed
+      Examples: Java, DotNet 
+        int x = 10;
+        x = true; //error 
+
+====
+  TypeScript Syntax
+  ---
+    var x: number = 10;
+    x = 100; // works
+    x = true; //error 
+
+  
+
+
+
+  
+Authentication using PassportJS
+======
+  Step 0:
+    npm install passport passport-local express-session express-jwt jsonwebtoken 
+
+Step 1
+    Setup router for auth and add service for it
+    router/auth.js 
+    services/authService.js 
+
+Step 2:
+    Work on post method. 
+    Endpoints to listen are 'signup' and 'login'
+
+Step 3: 
+    get the data and send it to service 
+    Then, work on registration flow 
+
+Step 4 
+    Work on Passport Config
+
+Step5 
+    Write the util methods to do with hash
+
+Step6 
+    in app.js final config for passport is needed
+    after view engine, 
+    
+    app.use(passport.initialize());
+    app.use(passport.session())
+
+
+and after express static path
+
+app.use(session({
+  secret: 'thesecret',
+  saveUninitialized: false,
+  resave: false
+}))
+
+var jwt = require('express-jwt');
+var auth = jwt({
+  secret: 'MY_SECRET',
+  userProperty: 'payload'
+});
+
+=====
+Sidenotes
+----
+In services inside signup method, you can also generate temp password  -- Ref 
+//https://github.com/arunprabu/contact-mgr-api/blob/master/services/authService.js
+//generate password
+//var generator = require('generate-password');
+ //generate temp password 
+  // var _tempPassword = generator.generate({
+  //                                         length: 14,
+  //                                         numbers: true
+  //                                       });
+
+
+
+
+
+====
+WebRTC 
+====
+    WebRTC - Real Time Communication Standard
+    HTML5 Standard for browsers to communicate between them 
+    Browsers can communicate in real time with other browser 
+
+    WebRTC has some building blocks for developers to use to build apps 
+    The apps can do video chat over internet 
+    WebRTC works on supported browser. 
+    And It doesn't require any other additional tools. 
+
+    Along with HTML5, a JavaScript API is introduced for WebRTC 
+    The JS API enables developers to develop WebRTC based webapps 
+    It connects directly to the browser without any storage needed in between. 
+    So, essentially it is a peer to peer connection 
+    (similar to a chrome to another firefox)
+
+    Signalling Server 
+
+    In a nutshell, WebRTC is a free, open project that provides browsers 
+    and mobile applications with Real-Time Communications (RTC) 
+    capabilities via simple API’s.
+
+    We need a front end. So let's build one in pug 
+
+Websockets 
+====
+    Communication between browser and a server 
+    One way is HTTP; another is websocket 
+
+    WebSocket is a computer communications protocol, 
+    which provides full-duplex communication channels over a 
+    single TCP connection.
+
+    WebSocket is a bi-directional communication between 
+    the server and the client which implies that 
+    both parties can communicate and exchange data at the same time.
+
+    Allows real-time data flow b/w both client and server 
+
+    Socket.io -- an implementation of websockets concept in JS (usable in both NodeJS and Front end) 
+    To build this app: 
+    Refer: https://socket.io/docs/ and https://socket.io
+
+    Example app is here https://socket.io/demos/chat/ 
+
+====

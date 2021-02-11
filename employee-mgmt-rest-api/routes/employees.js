@@ -1,4 +1,5 @@
 var express = require('express');
+const rxjs = require('rxjs');
 var multer = require('multer');
 
 // if you want to have control over the saved file name and folder
@@ -36,6 +37,36 @@ router.post('/', function (req, res, next) {
   });
 
 });
+
+
+/* Observable Demo */
+router.get('/tick', (req, res, next) => {
+
+
+  const clock$ = rxjs.Observable.create((subject) => {
+      console.log('In Observable');
+      const interval = setInterval(() => {
+          subject.next('tick');
+      }, 1000);
+      setTimeout(() => clearInterval(interval), 7 * 1000);
+  });
+
+
+  const subscription = clock$.subscribe( (value) => {
+    console.log('Inside Subscribe');
+    //send multiple responses to the client
+    res.write(`Tick ${value}`);
+    
+  });
+    
+  setTimeout(() => subscription.unsubscribe(), 10 * 1000);
+
+  
+
+  
+
+});
+
 
 /* GET employees listing.  http://localhost:3000/api/employees  */
 router.get('/', function (req, res, next) {
@@ -101,6 +132,7 @@ router.post('/upload', upload.single('employeeDP'), (req, res, next) => {
     res.send(400);
   }
 });
+
 
 
 module.exports = router;
